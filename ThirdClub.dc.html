@@ -13,8 +13,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500;1,9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-  body { background: #FBF5EC; }
+  html { scroll-behavior: smooth; max-width: 100%; overflow-x: hidden; }
+  body { background: #FBF5EC; max-width: 100%; overflow-x: hidden; }
+  img, svg, iframe { max-width: 100%; }
   a { color: #B91C1C; text-decoration: none; }
   a:hover { color: #7F1D1D; }
   @keyframes tc-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
@@ -26,19 +27,55 @@
     nav[data-nav] { padding: 16px 24px !important; }
   }
   @media (max-width: 767px) {
+    div[style*="position:sticky"] { padding: 12px 12px 0 !important; }
+    nav[data-nav] { gap: 12px !important; padding: 12px 14px !important; }
+    nav[data-nav] > a:first-child { font-size: 24px !important; min-width: 0; }
+    nav[data-nav] > a:last-child { display: none !important; }
+    div[data-burger] { margin-left: auto; padding: 8px; }
     svg[data-swirl="1"] { height: 70vh !important; width: 70vh !important; }
     svg[data-swirl="2"] { display: none !important; }
     nav[data-nav] { padding: 14px 20px !important; }
     div[data-navlinks] { display: none !important; }
     div[data-burger] { display: flex !important; }
-    img[data-heroimg] { height: 480px !important; }
+    section#top { padding-left: 16px !important; padding-right: 16px !important; }
+    section#top > div[style*="max-width:900px"] { padding-top: 64px !important; }
+    section#top h1 { font-size: clamp(38px, 11vw, 52px) !important; }
+    section#top p { max-width: 100% !important; }
+    section#top a[href="/roast-my-cart"] { max-width: 100%; justify-content: center; gap: 10px !important; padding: 12px 18px 12px 14px !important; font-size: 15px !important; }
+    img[data-heroimg] { width: 100% !important; height: 480px !important; }
     div[data-herospacer] { height: 480px !important; }
-    div[data-trustband] { padding-bottom: 80px !important; }
-    div[data-grid="products"] { grid-template-columns: repeat(2, 1fr) !important; }
-    div[data-trustgrid] { grid-template-columns: repeat(2, 1fr) !important; row-gap: 20px; }
-    section[data-sec] { padding-top: 64px !important; padding-bottom: 64px !important; }
+    div[data-trustband] { padding: 32px 16px 72px !important; }
+    div[data-trustgrid] { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; padding: 20px 12px !important; row-gap: 20px; }
+    div[data-trustgrid] > div { min-width: 0; padding: 0 8px !important; gap: 8px !important; }
+    div[data-grid="products"] { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 12px !important; }
+    section[data-sec] { padding: 56px 16px !important; }
+    section[data-sec] [style*="min-width:"] { min-width: 0 !important; max-width: 100% !important; }
+    div[data-card] { flex: 0 0 100% !important; width: 100% !important; min-width: 0 !important; }
+    section#about > div > div, section#roast > div > div { flex: 0 0 100% !important; width: 100% !important; }
+    section#investigations > div > div { min-width: 0 !important; }
+    section#roast [style*="display:flex"][style*="margin-top:32px"] { gap: 10px !important; }
+    section#roast [style*="margin-top:32px"] > a { flex: 1 1 100%; text-align: center; }
     div[data-phone] { margin: 0 auto !important; transform: scale(0.85); transform-origin: top center; }
     div[data-card] { padding: 24px !important; }
+    footer { padding: 0 16px 24px !important; }
+    footer > div { padding: 40px 24px 28px !important; border-radius: 24px !important; }
+    footer > div > div:first-child > div { flex: 0 0 100% !important; min-width: 0 !important; }
+    footer span { max-width: 100% !important; }
+  }
+  @media (max-width: 480px) {
+    section#top { min-height: auto !important; }
+    section#top > div[style*="max-width:900px"] { padding-top: 52px !important; }
+    section#top p { font-size: 17px !important; }
+    section#top a[href="/roast-my-cart"] { width: 100%; }
+    div[data-card] { padding: 20px !important; }
+    section[data-sec] h3 { font-size: clamp(24px, 7vw, 30px) !important; }
+  }
+  @media (max-width: 390px) {
+    nav[data-nav] > a:first-child { font-size: 22px !important; }
+    img[data-heroimg], div[data-herospacer] { height: 420px !important; }
+    div[data-trustgrid] { grid-template-columns: 1fr !important; }
+    div[data-trustgrid] > div { padding: 0 12px !important; }
+    div[data-phone] { transform: scale(0.76); }
   }
 </style>
 <script src="./image-slot.js"></script>

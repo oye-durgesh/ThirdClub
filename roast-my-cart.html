@@ -13,7 +13,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500;1,9..144,600;1,9..144,700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { max-width: 100%; overflow-x: hidden; }
   body { background: #FCEEEE; }
+  img, svg, iframe { max-width: 100%; }
   a { color: #B91C1C; text-decoration: none; }
   a:hover { color: #7F1D1D; }
   @keyframes tc-fade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
@@ -33,10 +35,45 @@
     div[data-row] > div { width: 100% !important; }
   }
   @media (max-width: 767px) {
+    div[style*="position:sticky"] { padding: 12px 12px 0 !important; }
+    nav[data-nav] { gap: 12px !important; padding: 12px 14px !important; }
+    nav[data-nav] > a:first-child { font-size: 24px !important; min-width: 0; }
+    nav[data-nav] > a:last-child { display: none !important; }
+    div[data-burger] { margin-left: auto; padding: 8px; }
     div[data-cartgrid] { grid-template-columns: 1fr !important; }
-    section[data-sec] { padding-top: 64px !important; padding-bottom: 64px !important; }
+    section[data-sec] { padding: 56px 16px !important; }
     div[data-row] { flex-direction: column !important; align-items: flex-start !important; }
     div[data-row] > div { width: 100% !important; }
+    section[data-sec] [style*="min-width:"] { min-width: 0 !important; max-width: 100% !important; }
+    section[data-sec] p { max-width: 100% !important; }
+    section[data-sec] button, section[data-sec] a { max-width: 100% !important; white-space: normal; }
+    section[data-sec] h3 { font-size: clamp(28px, 8vw, 40px) !important; }
+    section[data-sec] > div[style*="max-width:720px"] { width: 100% !important; }
+    section[data-sec] label { width: 100% !important; height: 280px !important; margin-top: 36px !important; padding: 20px !important; text-align: center; }
+    div[onClick] > div[style*="width:520px"] { padding: 24px !important; }
+    div[data-row] { gap: 16px !important; }
+    div[data-row] > div { min-width: 0 !important; }
+    div[data-cartgrid] { gap: 16px !important; margin-top: 40px !important; }
+    div[data-cartgrid] > div, div[data-cartgrid] > button { min-width: 0 !important; }
+    div[data-cartgrid] [style*="width:80px"] { width: 64px !important; height: 64px !important; }
+    div[data-share-card] { width: 100% !important; height: 600px !important; padding: 28px 22px !important; }
+    footer { padding: 0 16px 24px !important; }
+    footer > div { padding: 40px 24px 28px !important; border-radius: 24px !important; }
+    footer > div > div:first-child > div { flex: 0 0 100% !important; min-width: 0 !important; }
+    footer span { max-width: 100% !important; }
+  }
+  @media (max-width: 480px) {
+    section[data-sec] { padding-left: 14px !important; padding-right: 14px !important; }
+    section[data-sec] label { height: 250px !important; }
+    section[data-sec] h1 { font-size: clamp(36px, 11vw, 46px) !important; }
+    section[data-sec] > div[style*="background:#7F1D1D"] { padding: 52px 20px !important; }
+    div[data-share-card] { height: 570px !important; padding: 22px 16px !important; }
+  }
+  @media (max-width: 390px) {
+    nav[data-nav] > a:first-child { font-size: 22px !important; }
+    section[data-sec] label { height: 230px !important; }
+    div[data-share-card] { height: 550px !important; }
+    div[onClick] > div[style*="width:520px"] { padding: 20px !important; }
   }
 </style>
 <script src="./image-slot.js"></script>
@@ -261,7 +298,7 @@
       <h3 style="font-family:'Fraunces',serif;font-style:italic;font-weight:600;font-size:40px;">Share your roast.</h3>
       <p style="font-size:18px;color:#7F1D1D;margin-top:12px;">Tag a friend whose cart needs help.</p>
       <div style="display:flex;justify-content:center;margin-top:48px;">
-        <div style="position:relative;width:400px;max-width:100%;height:640px;background:#B91C1C;border-radius:32px;padding:40px;color:#FDF6F1;display:flex;flex-direction:column;align-items:center;text-align:center;">
+        <div data-share-card style="position:relative;width:400px;max-width:100%;height:640px;background:#B91C1C;border-radius:32px;padding:40px;color:#FDF6F1;display:flex;flex-direction:column;align-items:center;text-align:center;">
           <div style="width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;">
             <span style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;letter-spacing:0.08em;">#WhatsInYourCart</span>
             <span style="font-weight:800;font-size:14px;letter-spacing:0.08em;">THIRDCLUB</span>
