@@ -1,0 +1,14 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "cleanUrls": true,
+  "rewrites": [
+    {
+      "source": "/",
+      "destination": "/ThirdClub.dc.html"
+    },
+    {
+      "source": "/roast-my-cart",
+      "destination": "/Roast%20My%20Cart.dc.html"
+    }
+  ]
+}
