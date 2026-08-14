@@ -13,3 +13,4 @@ Open [http://localhost:4173](http://localhost:4173).
 ## Deploy to Vercel
 
 Import this repository into Vercel. It is configured as a static site and does not require a build command.
+# Third_club
