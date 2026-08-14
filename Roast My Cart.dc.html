@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500;1,9..144,600;1,9..144,700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #FCEEEE; }
+  a { color: #B91C1C; text-decoration: none; }
+  a:hover { color: #7F1D1D; }
+  @keyframes tc-fade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+  @keyframes tc-slidein { from { opacity: 0; transform: translateX(16px); } to { opacity: 1; transform: none; } }
+  @keyframes tc-scanline { 0% { top: 0; } 100% { top: 100%; } }
+  @keyframes tc-shake { 0%,100% { transform: translateX(0); } 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
+  @keyframes tc-flash { 0%,100% { opacity: 1; } 50% { opacity: 0.15; } }
+  ::selection { background: #DC2626; color: #FDF6F1; }
+  @media (max-width: 1120px) {
+    div[data-navlinks] { display: none !important; }
+    div[data-burger] { display: flex !important; }
+    nav[data-nav] { padding: 16px 24px !important; }
+    div[data-cartgrid] { grid-template-columns: repeat(2, 1fr) !important; }
+  }
+  @media (max-width: 1024px) {
+    div[data-row] { flex-direction: column !important; align-items: flex-start !important; }
+    div[data-row] > div { width: 100% !important; }
+  }
+  @media (max-width: 767px) {
+    div[data-cartgrid] { grid-template-columns: 1fr !important; }
+    section[data-sec] { padding-top: 64px !important; padding-bottom: 64px !important; }
+    div[data-row] { flex-direction: column !important; align-items: flex-start !important; }
+    div[data-row] > div { width: 100% !important; }
+  }
+</style>
+<script src="./image-slot.js"></script>
+</helmet>
+<div style="background:#FCEEEE;color:#1A1A1A;font-family:'Inter',sans-serif;overflow-x:hidden;min-height:100vh;">
+
+  <!-- ===== NAV ===== -->
+  <div style="position:sticky;top:0;z-index:50;padding:24px 24px 0;">
+    <nav data-nav style="width:100%;max-width:1280px;margin:0 auto;background:rgba(253,246,241,0.88);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-radius:999px;box-shadow:0 2px 12px rgba(0,0,0,0.04);display:flex;align-items:center;justify-content:space-between;gap:24px;padding:16px 40px;">
+      <a href="ThirdClub.dc.html" style="display:inline-flex;align-items:center;font-weight:800;font-size:28px;letter-spacing:-0.02em;color:#1A1A1A;flex-shrink:0;">
+        <span>TH</span><span style="position:relative;display:inline-block;">I<span style="position:absolute;top:-8px;left:50%;transform:translateX(-50%);width:8px;height:8px;background:#DC2626;border-radius:1px;"></span></span><span>RD</span><span style="color:#DC2626;">CLUB</span>
+      </a>
+      <div data-navlinks style="display:flex;align-items:center;gap:28px;font-weight:500;font-size:16px;white-space:nowrap;">
+        <a href="ThirdClub.dc.html" style="color:#1A1A1A;">Home</a>
+        <a href="ThirdClub.dc.html#investigations" style="color:#1A1A1A;">Investigations</a>
+        <a href="ThirdClub.dc.html#hall" style="color:#1A1A1A;">Ingredients</a>
+        <a href="ThirdClub.dc.html#about" style="color:#1A1A1A;">About</a>
+      </div>
+      <div data-burger style="display:none;flex-direction:column;gap:5px;cursor:pointer;">
+        <span style="display:block;width:24px;height:2px;background:#1A1A1A;"></span>
+        <span style="display:block;width:24px;height:2px;background:#1A1A1A;"></span>
+        <span style="display:block;width:24px;height:2px;background:#1A1A1A;"></span>
+      </div>
+      <a href="ThirdClub.dc.html#hall" style="background:#DC2626;color:#FDF6F1;font-weight:500;font-size:15px;padding:14px 28px;border-radius:999px;flex-shrink:0;white-space:nowrap;">Check a Product</a>
+    </nav>
+  </div>
+
+  <!-- ===== SCREEN 1 — UPLOAD ===== -->
+  <sc-if value="{{ isUpload }}" hint-placeholder-val="{{ true }}">
+  <section data-sec style="position:relative;min-height:80vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:96px 24px;overflow:hidden;animation:tc-fade .3s ease both;">
+    <svg viewBox="0 0 400 400" preserveAspectRatio="xMidYMid meet" aria-hidden="true" style="position:absolute;top:50%;left:60%;height:90vh;width:90vh;transform:translate(-50%,-50%) rotate(-15deg);opacity:0.4;pointer-events:none;z-index:0;overflow:visible;">
+      <path d="M175 390 C 25 355, 5 130, 175 20 C 330 -78, 420 130, 300 235 C 205 318, 65 275, 105 165 C 140 70, 300 45, 385 130" fill="none" stroke="#F5D5D5" stroke-width="70" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"></path>
+    </svg>
+    <div style="position:relative;z-index:1;max-width:720px;display:flex;flex-direction:column;align-items:center;">
+      <div style="font-size:13px;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:#DC2626;">ThirdClub Cart Scan</div>
+      <h1 style="font-family:'Fraunces',serif;font-style:italic;font-weight:600;font-size:clamp(40px,6.5vw,72px);line-height:1.05;letter-spacing:-0.03em;color:#1A1A1A;margin-top:20px;">Upload your cart.<br><span style="color:#B91C1C;">See what's in it.</span></h1>
+      <p style="font-size:20px;line-height:1.5;color:#7F1D1D;margin-top:24px;max-width:560px;">Works with Swiggy Instamart, Zepto, Blinkit, and BigBasket screenshots.</p>
+      <label style="width:640px;max-width:100%;height:320px;margin-top:48px;background:#FDF6F1;border:2px dashed #DC2626;border-radius:24px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;cursor:pointer;transition:all .2s ease;" style-hover="border-style:solid;background:#FFFCFA;">
+        <span style="width:48px;height:48px;border:2px solid #DC2626;border-radius:12px;color:#DC2626;font-size:22px;display:flex;align-items:center;justify-content:center;">↑</span>
+        <span style="font-size:18px;font-weight:500;color:#1A1A1A;">Drop your cart screenshot here</span>
+        <span style="font-size:14px;color:#4A4A4A;text-decoration:underline;text-decoration-color:#DC2626;">or click to browse</span>
+        <input type="file" accept="image/*" onChange="{{ onUpload }}" style="display:none;">
+      </label>
+      <p style="font-size:13px;color:#4A4A4A;margin-top:20px;">No signup. Nothing stored. Everything runs in your browser.</p>
+      <button onClick="{{ useSample }}" style="margin-top:24px;background:none;border:0;font-family:'Inter',sans-serif;font-size:15px;color:#B91C1C;text-decoration:underline;cursor:pointer;">Don't have a screenshot? Try a sample cart →</button>
+    </div>
+  </section>
+  </sc-if>
+
+  <!-- ===== SCREEN 2 — SCANNING ===== -->
+  <sc-if value="{{ isScanning }}" hint-placeholder-val="{{ false }}">
+  <section data-sec style="max-width:1120px;margin:0 auto;padding:96px 24px;animation:tc-fade .3s ease both;">
+    <div data-row style="display:flex;flex-wrap:wrap;gap:56px;align-items:flex-start;">
+      <div style="flex:1.5;min-width:300px;">
+        <div style="position:relative;background:#1A1A1A;border-radius:32px;padding:12px;box-shadow:0 20px 60px rgba(0,0,0,0.18);">
+          <div style="position:relative;border-radius:22px;overflow:hidden;background:#FDF6F1;height:520px;">
+            <image-slot id="rmc-screenshot" shape="rect" fit="cover" placeholder="Your cart screenshot" style="display:block;width:100%;height:100%;"></image-slot>
+            <div style="position:absolute;left:0;right:0;height:3px;background:#DC2626;box-shadow:0 0 12px 4px rgba(220,38,38,0.55);animation:tc-scanline 2.5s linear infinite;pointer-events:none;"></div>
+          </div>
+        </div>
+      </div>
+      <div style="flex:1;min-width:280px;">
+        <h2 style="font-family:'Fraunces',serif;font-style:italic;font-weight:600;font-size:32px;color:#B91C1C;">Scanning your cart…</h2>
+        <div style="display:flex;flex-direction:column;gap:16px;margin-top:32px;">
+          <sc-for list="{{ detected }}" as="d" hint-placeholder-count="3">
+            <div style="display:flex;align-items:baseline;gap:10px;animation:tc-slidein .35s ease both;">
+              <span style="color:#DC2626;font-size:16px;font-weight:700;line-height:1.4;">✓</span>
+              <span style="font-size:16px;font-weight:500;color:#1A1A1A;">{{ d.name }}</span>
+              <span style="font-size:14px;color:#4A4A4A;">{{ d.brand }}</span>
+            </div>
+          </sc-for>
+        </div>
+        <sc-if value="{{ scanDone }}" hint-placeholder-val="{{ false }}">
+          <button onClick="{{ goToCart }}" style="margin-top:40px;background:#DC2626;color:#FDF6F1;font-family:'Inter',sans-serif;font-weight:600;font-size:16px;letter-spacing:0.05em;text-transform:uppercase;padding:18px 40px;border:0;border-radius:999px;cursor:pointer;animation:tc-fade .3s ease both;">Looks right →</button>
+        </sc-if>
+      </div>
+    </div>
+  </section>
+  </sc-if>
+
+  <!-- ===== SCREEN 3 — DETECTED ITEMS ===== -->
+  <sc-if value="{{ isCart }}" hint-placeholder-val="{{ false }}">
+  <section data-sec style="max-width:1120px;margin:0 auto;padding:96px 24px;text-align:center;animation:tc-fade .3s ease both;">
+    <div style="font-size:13px;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:#DC2626;">Your cart</div>
+    <h2 style="font-family:'Fraunces',serif;font-style:italic;font-weight:600;font-size:clamp(32px,5vw,56px);line-height:1.1;letter-spacing:-0.02em;margin-top:16px;">We found <span style="color:#B91C1C;">{{ cartCountLabel }}</span> in your cart.</h2>
+    <p style="font-size:18px;color:#7F1D1D;margin-top:16px;">Add anything we missed. Remove anything wrong. Then roast it.</p>
+
+    <div data-cartgrid style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:64px;text-align:left;">
+      <sc-for list="{{ cart }}" as="p" hint-placeholder-count="6">
+        <div style="position:relative;background:#FDF6F1;border-radius:16px;padding:24px;box-shadow:0 2px 12px rgba(0,0,0,0.04);display:flex;align-items:center;gap:16px;">
+          <image-slot id="rmc-thumb-{{ p.id }}" radius="12" fit="contain" placeholder=" " style="display:block;width:80px;height:80px;flex-shrink:0;"></image-slot>
+          <span style="display:block;padding-right:16px;">
+            <span style="display:block;font-size:16px;font-weight:600;color:#1A1A1A;line-height:1.3;">{{ p.name }}</span>
+            <span style="display:block;font-size:14px;color:#4A4A4A;margin-top:4px;">{{ p.brand }}</span>
+          </span>
+          <button onClick="{{ p.remove }}" aria-label="Remove item" style="position:absolute;top:12px;right:12px;width:24px;height:24px;border:0;border-radius:50%;background:none;color:#DC2626;font-size:15px;font-weight:700;cursor:pointer;line-height:1;">✕</button>
+        </div>
+      </sc-for>
+      <button onClick="{{ openSearch }}" style="background:none;border:1.5px dashed #DC2626;border-radius:16px;padding:24px;min-height:128px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;cursor:pointer;font-family:'Inter',sans-serif;">
+        <span style="color:#DC2626;font-size:28px;line-height:1;">+</span>
+        <span style="font-size:15px;font-weight:500;color:#B91C1C;">Add missed item</span>
+      </button>
+    </div>
+
+    <div style="margin-top:56px;display:flex;flex-direction:column;align-items:center;gap:28px;">
+      <button onClick="{{ reset }}" style="background:none;border:0;font-family:'Inter',sans-serif;font-size:15px;color:#B91C1C;text-decoration:underline;cursor:pointer;">← Start over with a new cart</button>
+      <button onClick="{{ goToResults }}" style="background:#DC2626;color:#FDF6F1;font-family:'Inter',sans-serif;font-weight:600;font-size:18px;letter-spacing:0.05em;text-transform:uppercase;padding:22px 56px;border:0;border-radius:999px;cursor:pointer;box-shadow:0 4px 16px rgba(220,38,38,0.25);">How cooked is my cart? →</button>
+    </div>
+  </section>
+
+  <sc-if value="{{ searchOpen }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ closeSearch }}" style="position:fixed;inset:0;z-index:100;background:rgba(26,26,26,0.45);display:flex;align-items:center;justify-content:center;padding:24px;animation:tc-fade .2s ease both;">
+      <div onClick="{{ stopClose }}" style="width:520px;max-width:100%;background:#FDF6F1;border-radius:24px;padding:32px;box-shadow:0 24px 64px rgba(0,0,0,0.25);text-align:left;">
+        <h3 style="font-family:'Fraunces',serif;font-style:italic;font-weight:600;font-size:26px;color:#B91C1C;">Add a product</h3>
+        <input type="text" value="{{ query }}" onChange="{{ onQuery }}" placeholder="Search products…" autofocus="true" style="width:100%;margin-top:20px;padding:14px 18px;font-family:'Inter',sans-serif;font-size:16px;color:#1A1A1A;background:#FCEEEE;border:1px solid rgba(185,28,28,0.25);border-radius:999px;outline:none;">
+        <div style="margin-top:16px;max-height:280px;overflow-y:auto;display:flex;flex-direction:column;">
+          <sc-for list="{{ searchResults }}" as="r" hint-placeholder-count="4">
+            <button onClick="{{ r.add }}" style="display:flex;align-items:baseline;gap:10px;text-align:left;background:none;border:0;border-bottom:1px solid rgba(185,28,28,0.12);padding:14px 4px;cursor:pointer;font-family:'Inter',sans-serif;">
+              <span style="font-size:16px;font-weight:500;color:#1A1A1A;">{{ r.name }}</span>
+              <span style="font-size:14px;color:#4A4A4A;">{{ r.brand }}</span>
+            </button>
+          </sc-for>
+        </div>
+        <button onClick="{{ closeSearch }}" style="margin-top:24px;background:none;border:0;font-family:'Inter',sans-serif;font-size:15px;color:#B91C1C;text-decoration:underline;cursor:pointer;">Close</button>
+      </div>
+    </div>
+  </sc-if>
+  </sc-if>
+
+  <!-- ===== SCREEN 4 — RESULTS ===== -->
+  <sc-if value="{{ isResults }}" hint-placeholder-val="{{ false }}">
+  <div style="animation:tc-fade .3s ease both;">
+
+    <!-- 4A SCORE BANNER -->
+    <section data-sec style="max-width:1280px;margin:0 auto;padding:64px 24px 0;">
+      <div style="position:relative;background:#7F1D1D;border-radius:32px;padding:80px 40px;text-align:center;color:#FDF6F1;{{ shakeStyle }}">
+        <sc-if value="{{ offCharts }}" hint-placeholder-val="{{ false }}">
+          <div style="position:absolute;top:32px;right:40px;width:48px;height:48px;border-radius:50%;background:#DC2626;color:#FDF6F1;font-weight:800;font-size:26px;display:flex;align-items:center;justify-content:center;animation:tc-flash .7s ease-in-out infinite;">!</div>
+        </sc-if>
+        <div style="font-size:13px;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:#F1C8C8;">Your cart score</div>
+        <div style="font-family:'Fraunces',serif;font-weight:700;font-size:clamp(110px,20vw,200px);line-height:1;letter-spacing:-0.04em;">{{ bannerScore }}</div>
+        <div style="font-family:'Fraunces',serif;font-style:italic;font-weight:600;font-size:clamp(32px,6vw,56px);line-height:1.1;">{{ verdictTier }}</div>
+        <div style="font-size:13px;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:#F1C8C8;margin-top:40px;">My cart personality:</div>
+        <div style="font-weight:700;font-size:clamp(22px,4vw,32px);letter-spacing:0.02em;text-transform:uppercase;margin-top:8px;">{{ personality }}</div>
+      </div>
+    </section>
+
+    <!-- 4A-2 WHY IT MATTERS -->
+    <section data-sec style="max-width:1280px;margin:0 auto;padding:96px 24px 0;text-align:center;">
+      <h3 style="font-family:'Fraunces',serif;font-style:italic;font-weight:600;font-size:40px;">What this cart is doing to you.</h3>
+      <p style="font-size:18px;color:#7F1D1D;margin-top:12px;">Consumed daily, here's what your cart contributes to.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:24px;justify-content:center;align-items:stretch;margin-top:48px;text-align:left;">
+        <sc-for list="{{ fearFacts }}" as="f" hint-placeholder-count="3">
+          <div style="flex:1;min-width:280px;max-width:380px;background:#FDF6F1;border-radius:24px;padding:32px;box-shadow:0 2px 12px rgba(0,0,0,0.04);display:flex;flex-direction:column;">
+            <span style="width:24px;height:24px;display:flex;align-items:center;justify-content:center;color:#DC2626;font-size:20px;font-weight:700;line-height:1;">△</span>
+            <div style="font-weight:700;font-size:22px;color:#1A1A1A;margin-top:16px;">{{ f.title }}</div>
+            <p style="font-size:16px;line-height:1.6;color:#4A4A4A;margin-top:12px;">{{ f.stat }}</p>
+            <p style="font-family:'Fraunces',serif;font-style:italic;font-size:14px;color:#B91C1C;margin-top:auto;padding-top:20px;">{{ f.footer }}</p>
+          </div>
+        </sc-for>
+      </div>
+      <p style="font-style:italic;font-size:12px;color:#4A4A4A;margin-top:24px;">Statistics from ICMR, WHO, and Lancet. ThirdClub does not diagnose — it informs.</p>
+    </section>
+
+    <!-- 4B PER-PRODUCT BREAKDOWN -->
+    <section data-sec style="max-width:1280px;margin:0 auto;padding:96px 24px;">
+      <h3 style="font-family:'Fraunces',serif;font-style:italic;font-weight:600;font-size:40px;color:#1A1A1A;text-align:center;">What's actually in your cart</h3>
+      <div style="display:flex;flex-direction:column;gap:24px;margin-top:64px;">
+        <sc-for list="{{ breakdown }}" as="b" hint-placeholder-count="6">
+          <div data-row style="background:#FDF6F1;border-radius:24px;padding:24px;box-shadow:0 2px 12px rgba(0,0,0,0.04);display:flex;flex-wrap:wrap;align-items:center;gap:24px;">
+            <image-slot id="rmc-row-{{ b.id }}" radius="12" fit="contain" placeholder=" " style="display:block;width:80px;height:80px;flex-shrink:0;"></image-slot>
+            <div style="width:24%;min-width:170px;">
+              <div style="font-size:18px;font-weight:600;color:#1A1A1A;line-height:1.3;">{{ b.name }}</div>
+              <div style="font-size:14px;color:#4A4A4A;margin-top:4px;">{{ b.brand }}</div>
+            </div>
+            <div style="width:30%;min-width:200px;display:flex;flex-direction:column;gap:12px;">
+              <div>
+                <div style="font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#DC2626;">Sugar</div>
+                <div style="display:flex;align-items:center;gap:5px;margin-top:6px;flex-wrap:wrap;">
+                  <sc-for list="{{ b.spoons }}" as="sp" hint-placeholder-count="4">
+                    <span style="display:block;width:9px;height:15px;background:#DC2626;border-radius:50% 50% 35% 35%;"></span>
+                  </sc-for>
+                  <span style="font-size:12px;color:#4A4A4A;margin-left:4px;">{{ b.sugarLabel }}</span>
+                </div>
+              </div>
+              <div>
+                <div style="font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#DC2626;">Sodium</div>
+                <div style="display:flex;align-items:center;gap:5px;margin-top:6px;flex-wrap:wrap;">
+                  <sc-for list="{{ b.shakers }}" as="sh" hint-placeholder-count="2">
+                    <span style="display:block;width:9px;height:15px;background:#7F1D1D;border-radius:3px 3px 4px 4px;"></span>
+                  </sc-for>
+                  <span style="font-size:12px;color:#4A4A4A;margin-left:4px;">{{ b.sodiumLabel }}</span>
+                </div>
+              </div>
+            </div>
+            <div style="width:24%;min-width:180px;display:flex;flex-wrap:wrap;gap:6px;align-content:flex-start;">
+              <sc-for list="{{ b.flags }}" as="f" hint-placeholder-count="3">
+                <span style="display:inline-flex;align-items:center;gap:4px;background:#FCEEEE;border:1px solid #B91C1C;color:#B91C1C;font-size:11px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;padding:5px 10px;border-radius:999px;"><span style="font-weight:700;">✕</span>{{ f }}</span>
+              </sc-for>
+            </div>
+            <div style="flex:1;min-width:150px;font-family:'Fraunces',serif;font-style:italic;font-size:14px;line-height:1.4;color:#B91C1C;">{{ b.verdict }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <!-- 4C TOTAL DAMAGE -->
+    <section data-sec style="max-width:1280px;margin:0 auto;padding:0 24px 96px;text-align:center;">
+      <h3 style="font-family:'Fraunces',serif;font-style:italic;font-weight:600;font-size:40px;">The total damage.</h3>
+      <div style="display:flex;flex-wrap:wrap;gap:24px;justify-content:center;align-items:stretch;margin-top:48px;">
+        <sc-for list="{{ totalStats }}" as="t" hint-placeholder-count="3">
+          <div style="flex:1;min-width:260px;max-width:360px;background:#FDF6F1;border-radius:24px;padding:32px;box-shadow:0 2px 12px rgba(0,0,0,0.04);">
+            <div style="font-family:'Fraunces',serif;font-weight:700;font-size:72px;line-height:1;color:#B91C1C;">{{ t.value }}</div>
+            <div style="font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#1A1A1A;margin-top:16px;">{{ t.label }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <!-- 4D SHARE CARD -->
+    <section data-sec style="max-width:1280px;margin:0 auto;padding:0 24px 96px;text-align:center;">
+      <h3 style="font-family:'Fraunces',serif;font-style:italic;font-weight:600;font-size:40px;">Share your roast.</h3>
+      <p style="font-size:18px;color:#7F1D1D;margin-top:12px;">Tag a friend whose cart needs help.</p>
+      <div style="display:flex;justify-content:center;margin-top:48px;">
+        <div style="position:relative;width:400px;max-width:100%;height:640px;background:#B91C1C;border-radius:32px;padding:40px;color:#FDF6F1;display:flex;flex-direction:column;align-items:center;text-align:center;">
+          <div style="width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;">
+            <span style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;letter-spacing:0.08em;">#WhatsInYourCart</span>
+            <span style="font-weight:800;font-size:14px;letter-spacing:0.08em;">THIRDCLUB</span>
+          </div>
+          <div style="font-family:'Fraunces',serif;font-style:italic;font-size:28px;line-height:1.15;margin-top:20px;">I checked what was in my cart.</div>
+          <div style="font-family:'Fraunces',serif;font-style:italic;font-size:20px;margin-top:6px;opacity:0.9;">{{ counter }} Indians already have.</div>
+
+          <div style="width:320px;max-width:100%;margin-top:20px;">
+            <div style="position:relative;height:22px;">
+              <div style="position:absolute;bottom:0;left:{{ scorePct }};transform:translateX(-50%);width:0;height:0;border-left:9px solid transparent;border-right:9px solid transparent;border-top:12px solid #FDF6F1;"></div>
+            </div>
+            <div style="display:flex;height:24px;border-radius:6px;overflow:hidden;">
+              <span style="flex:25;background:#8FBF8F;"></span>
+              <span style="flex:25;background:#E8A855;"></span>
+              <span style="flex:25;background:#E85A3C;"></span>
+              <span style="flex:25;background:#7F1D1D;"></span>
+              <span style="flex:10;background:repeating-linear-gradient(45deg,#1A1A1A 0 5px,#DC2626 5px 10px);"></span>
+            </div>
+            <div style="display:flex;margin-top:8px;">
+              <span style="flex:25;font-size:8px;font-weight:600;letter-spacing:0.04em;">WELL DONE</span>
+              <span style="flex:25;font-size:8px;font-weight:600;letter-spacing:0.04em;">LOOK CLOSER</span>
+              <span style="flex:25;font-size:8px;font-weight:600;letter-spacing:0.04em;">COOKED</span>
+              <span style="flex:25;font-size:8px;font-weight:600;letter-spacing:0.04em;">BURNT</span>
+              <span style="flex:10;font-size:8px;font-weight:600;letter-spacing:0.04em;">OFF CHARTS</span>
+            </div>
+          </div>
+
+          <div style="width:100%;text-align:left;margin-top:18px;">
+            <div style="font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;opacity:0.75;">What I found</div>
+            <div style="display:flex;flex-direction:column;gap:6px;margin-top:8px;">
+              <sc-for list="{{ findings }}" as="f" hint-placeholder-count="3">
+                <div style="display:flex;align-items:flex-start;gap:8px;font-size:13px;line-height:1.35;">
+                  <span style="width:6px;height:6px;border-radius:50%;background:#FBC4C4;flex-shrink:0;margin-top:5px;"></span>
+                  <span>{{ f }}</span>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+
+          <div style="width:100%;border:1px solid rgba(253,246,241,0.4);border-radius:16px;padding:12px 16px;margin-top:14px;text-align:left;">
+            <div style="font-size:10px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;opacity:0.7;">Most misleading product</div>
+            <div style="font-family:'Fraunces',serif;font-style:italic;font-weight:700;font-size:19px;line-height:1.2;margin-top:2px;">{{ worstName }}</div>
+            <div style="font-size:13px;line-height:1.35;margin-top:2px;">{{ worstClaim }}</div>
+          </div>
+
+          <div style="font-family:'Fraunces',serif;font-style:italic;font-size:18px;line-height:1.3;margin-top:16px;">We're not against food.<br>We're against being lied to.</div>
+          <div style="font-size:14px;font-weight:600;text-decoration:underline;margin-top:12px;">Check your cart at thirdclub.in →</div>
+
+          <div style="width:100%;margin-top:auto;padding-top:14px;display:flex;align-items:center;justify-content:space-between;gap:12px;">
+            <span style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;letter-spacing:0.06em;">#WhatsInYourCart</span>
+            <span style="display:flex;align-items:center;gap:8px;">
+              <span style="font-family:'Fraunces',serif;font-style:italic;font-size:12px;">With</span>
+              <image-slot id="rmc-firstclub-logo" radius="8" fit="contain" src="uploads/pasted-1786686508629-0.png" placeholder=" " style="display:block;width:76px;height:32px;flex-shrink:0;background:transparent;"></image-slot>
+            </span>
+          </div>
+
+          <sc-if value="{{ offCharts }}" hint-placeholder-val="{{ false }}">
+            <div style="position:absolute;top:0;right:0;width:180px;height:180px;overflow:hidden;border-top-right-radius:32px;pointer-events:none;">
+              <div style="position:absolute;top:38px;right:-46px;width:220px;background:#DC2626;color:#FDF6F1;transform:rotate(45deg);text-align:center;padding:7px 0;font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;">Off the charts</div>
+            </div>
+          </sc-if>
+        </div>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-top:40px;">
+        <button onClick="{{ downloadCard }}" style="background:#DC2626;color:#FDF6F1;font-family:'Inter',sans-serif;font-weight:600;font-size:14px;letter-spacing:0.05em;text-transform:uppercase;padding:18px 32px;border:0;border-radius:999px;cursor:pointer;">Share on Instagram story</button>
+        <button onClick="{{ downloadCard }}" style="background:#DC2626;color:#FDF6F1;font-family:'Inter',sans-serif;font-weight:600;font-size:14px;letter-spacing:0.05em;text-transform:uppercase;padding:18px 32px;border:0;border-radius:999px;cursor:pointer;">Share on LinkedIn</button>
+        <button onClick="{{ downloadCard }}" style="background:#FDF6F1;color:#B91C1C;font-family:'Inter',sans-serif;font-weight:600;font-size:14px;letter-spacing:0.05em;text-transform:uppercase;padding:18px 32px;border:1.5px solid #B91C1C;border-radius:999px;cursor:pointer;">Download image</button>
+      </div>
+    </section>
+
+    <!-- 4E RESET -->
+    <section style="text-align:center;padding:0 24px 96px;">
+      <button onClick="{{ reset }}" style="background:none;border:0;font-family:'Inter',sans-serif;font-size:15px;color:#B91C1C;text-decoration:underline;cursor:pointer;">← Roast another cart</button>
+    </section>
+  </div>
+  </sc-if>
+
+  <!-- ===== FOOTER ===== -->
+  <footer style="max-width:1280px;margin:0 auto;padding:0 24px 40px;">
+    <div style="background:#7F1D1D;border-radius:32px;color:#FDF6F1;padding:64px 56px 40px;">
+      <div style="display:flex;flex-wrap:wrap;gap:48px;">
+        <div style="flex:1.4;min-width:240px;">
+          <div style="display:inline-flex;align-items:center;font-weight:800;font-size:24px;letter-spacing:-0.02em;"><span>TH</span><span style="position:relative;display:inline-block;">I<span style="position:absolute;top:-7px;left:50%;transform:translateX(-50%);width:7px;height:7px;background:#FDF6F1;border-radius:1px;"></span></span><span>RDCLUB</span></div>
+          <p style="font-family:'Fraunces',serif;margin-top:16px;font-size:20px;">Mass-Produced. <em style="font-style:italic;">Widely Consumed.</em></p>
+        </div>
+        <div style="flex:1;min-width:160px;">
+          <div style="font-size:12px;letter-spacing:0.15em;text-transform:uppercase;color:#F1C8C8;margin-bottom:16px;">Important Links</div>
+          <div style="display:flex;flex-direction:column;gap:10px;font-size:15px;">
+            <a href="ThirdClub.dc.html#investigations" style="color:#FDECEC;">Investigations</a>
+            <a href="ThirdClub.dc.html#hall" style="color:#FDECEC;">Ingredients Dictionary</a>
+            <a href="ThirdClub.dc.html#about" style="color:#FDECEC;">Press</a>
+          </div>
+        </div>
+        <div style="flex:1;min-width:160px;">
+          <div style="font-size:12px;letter-spacing:0.15em;text-transform:uppercase;color:#F1C8C8;margin-bottom:16px;">Legal</div>
+          <div style="display:flex;flex-direction:column;gap:10px;font-size:15px;">
+            <a href="#" style="color:#FDECEC;">Disclaimer</a>
+            <a href="#" style="color:#FDECEC;">Terms &amp; Conditions</a>
+            <a href="#" style="color:#FDECEC;">Privacy Policy</a>
+          </div>
+        </div>
+        <div style="flex:1;min-width:160px;">
+          <div style="font-size:12px;letter-spacing:0.15em;text-transform:uppercase;color:#F1C8C8;margin-bottom:16px;">Contact</div>
+          <a href="mailto:hello@thirdclub.in" style="color:#FDECEC;font-size:15px;">hello@thirdclub.in</a>
+        </div>
+      </div>
+      <div style="border-top:1px solid rgba(253,246,241,0.25);margin-top:48px;padding-top:24px;display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;font-size:13px;color:#F1C8C8;">
+        <span>© 2026 ThirdClub. An independent consumer awareness project.</span>
+        <span style="max-width:560px;">ThirdClub is not affiliated with, endorsed by, or in partnership with any brand mentioned. All product data is sourced from packaging labels and publicly available FSSAI databases.</span>
+      </div>
+    </div>
+  </footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280},&quot;startScreen&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;upload&quot;,&quot;cart&quot;,&quot;results&quot;],&quot;default&quot;:&quot;upload&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Prototype&quot;}}">
+const PRODUCTS = {
+  maggi: { name: 'Maggi 2-Minute Noodles', brand: 'Nestlé', servingSize: 70, sugarG: 1, sodiumMg: 1200, flags: ['Palm Oil','MSG','TBHQ','Refined Flour'], roastScore: 78, verdict: '2 min to cook. 20 years to process.', category: 'noodles' },
+  bournvita: { name: 'Bournvita', brand: 'Cadbury', servingSize: 20, sugarG: 7.4, sodiumMg: 60, flags: ['Added Sugar','Caramel Colour','Emulsifiers'], roastScore: 82, verdict: 'Marketed as strength. 37% sugar.', category: 'sugar' },
+  realJuice: { name: 'Real Fruit Juice', brand: 'Dabur', servingSize: 200, sugarG: 22, sodiumMg: 10, flags: ['Concentrate','Added Sugar','INS 211'], roastScore: 74, verdict: 'Says "Real". Barely any fruit.', category: 'sugar' },
+  frooti: { name: 'Frooti', brand: 'Parle Agro', servingSize: 250, sugarG: 30, sodiumMg: 15, flags: ['Concentrate','Added Sugar','INS 211','Artificial Flavour'], roastScore: 85, verdict: 'Mango madness. 7.5 spoons of sugar.', category: 'sugar' },
+  cocaCola: { name: 'Coca-Cola', brand: 'Coca-Cola', servingSize: 330, sugarG: 35, sodiumMg: 30, flags: ['Phosphoric Acid','Caramel Colour','INS 150d'], roastScore: 90, verdict: '9 tsp per can. Your entire daily limit.', category: 'sugar' },
+  lays: { name: 'Lays Classic Salted', brand: 'PepsiCo', servingSize: 52, sugarG: 1, sodiumMg: 330, flags: ['Palm Oil','MSG','TBHQ','Artificial Flavour'], roastScore: 72, verdict: "Betcha can't eat just one. That's the design.", category: 'sodium' },
+  kissanJam: { name: 'Kissan Mixed Fruit Jam', brand: 'HUL', servingSize: 20, sugarG: 13, sodiumMg: 20, flags: ['Added Sugar','Preservatives','Citric Acid'], roastScore: 76, verdict: '65% sugar. Fruit is on the label only.', category: 'sugar' },
+  parleG: { name: 'Parle-G', brand: 'Parle', servingSize: 55, sugarG: 15, sodiumMg: 200, flags: ['Refined Flour','Palm Oil','Invert Sugar'], roastScore: 68, verdict: "India's cheapest sugar delivery vehicle.", category: 'sugar' },
+  complan: { name: 'Complan Health Drink', brand: 'Zydus', servingSize: 33, sugarG: 12, sodiumMg: 90, flags: ['Added Sugar','Artificial Flavour','Emulsifiers'], roastScore: 80, verdict: 'Growth promise. Sugar delivery.', category: 'sugar' },
+  boost: { name: 'Boost', brand: 'HUL', servingSize: 20, sugarG: 8, sodiumMg: 55, flags: ['Added Sugar','Caramel Colour','Malt Extract'], roastScore: 79, verdict: 'The secret of energy is sugar.', category: 'sugar' },
+  kurkure: { name: 'Kurkure Masala Munch', brand: 'PepsiCo', servingSize: 45, sugarG: 2, sodiumMg: 420, flags: ['Palm Oil','MSG','Artificial Colours'], roastScore: 75, verdict: 'Rice, corn, and a chemistry set.', category: 'sodium' },
+  dairyMilk: { name: 'Dairy Milk', brand: 'Cadbury', servingSize: 45, sugarG: 25, sodiumMg: 80, flags: ['Added Sugar','Emulsifiers','Palm Oil'], roastScore: 70, verdict: '56% sugar by weight.', category: 'sugar' },
+  britanniaBread: { name: 'Britannia White Bread', brand: 'Britannia', servingSize: 60, sugarG: 4, sodiumMg: 460, flags: ['Refined Flour','Emulsifiers','Preservatives'], roastScore: 62, verdict: 'Refined flour with a health halo.', category: 'sodium' },
+  bingo: { name: 'Bingo Mad Angles', brand: 'ITC', servingSize: 40, sugarG: 2, sodiumMg: 390, flags: ['Palm Oil','MSG','Artificial Flavour'], roastScore: 73, verdict: 'Angles, not nutrition.', category: 'sodium' },
+  appyFizz: { name: 'Appy Fizz', brand: 'Parle Agro', servingSize: 250, sugarG: 32, sodiumMg: 20, flags: ['Concentrate','Added Sugar','INS 211'], roastScore: 86, verdict: 'Apple juice with the apple removed.', category: 'sugar' },
+  hideSeek: { name: 'Hide & Seek', brand: 'Parle', servingSize: 50, sugarG: 17, sodiumMg: 150, flags: ['Refined Flour','Invert Sugar','Palm Oil'], roastScore: 71, verdict: 'Chocolate chips, sugar base.', category: 'sugar' },
+  amulButter: { name: 'Amul Butter', brand: 'Amul', servingSize: 10, sugarG: 0, sodiumMg: 160, flags: ['Added Salt'], roastScore: 45, verdict: 'Utterly salted.', category: 'sodium' },
+  tropicana: { name: 'Tropicana Orange', brand: 'PepsiCo', servingSize: 200, sugarG: 20, sodiumMg: 10, flags: ['Concentrate','Added Sugar'], roastScore: 72, verdict: '100% juice. 100% sugar spike.', category: 'sugar' },
+  yippee: { name: 'Sunfeast Yippee Noodles', brand: 'ITC', servingSize: 70, sugarG: 2, sodiumMg: 1100, flags: ['Palm Oil','MSG','Refined Flour'], roastScore: 77, verdict: 'Long noodles. Longer ingredient list.', category: 'noodles' },
+  nutella: { name: 'Nutella', brand: 'Ferrero', servingSize: 15, sugarG: 8.5, sodiumMg: 5, flags: ['Added Sugar','Palm Oil','Emulsifiers'], roastScore: 81, verdict: 'Hazelnut spread. Mostly sugar and palm oil.', category: 'sugar' }
+};
+
+const MISLEADING = {
+  maggi: "Marketed as a 2-minute meal. 1200mg sodium per pack.",
+  bournvita: "Marketed as strength. 37% sugar.",
+  realJuice: "Marketed as real fruit. Made from concentrate.",
+  frooti: "Marketed as fresh mango. 30g sugar per bottle.",
+  cocaCola: "Marketed as refreshment. A full day's sugar per can.",
+  lays: "Marketed as simple potato. Palm oil, MSG and TBHQ.",
+  kissanJam: "Marketed as fruit. 65% sugar.",
+  parleG: "Marketed as glucose energy. Refined flour and palm oil.",
+  complan: "Marketed as growth. 36% sugar.",
+  boost: "Marketed as energy. Sugar and malt first.",
+  kurkure: "Marketed as a corn puff. 420mg sodium per pack.",
+  dairyMilk: "Marketed as milk. 56% sugar by weight.",
+  britanniaBread: "Marketed as daily fresh. Refined flour, 460mg sodium.",
+  bingo: "Marketed as a snack shape. Palm oil and MSG.",
+  appyFizz: "Marketed as apple. 32g sugar, no whole fruit.",
+  hideSeek: "Marketed as chocolate chips. Sugar-and-flour base.",
+  amulButter: "Marketed as pure butter. 160mg sodium per 10g.",
+  tropicana: "Marketed as 100% juice. Reconstituted concentrate.",
+  yippee: "Marketed as no-maida noodles. 1100mg sodium.",
+  nutella: "Marketed as hazelnut. Sugar and palm oil lead the list."
+};
+Object.keys(MISLEADING).forEach(k => { if (PRODUCTS[k]) PRODUCTS[k].misleadingClaim = MISLEADING[k]; });
+
+const CAMPAIGN_BASE = 127438;
+
+const PERSONALITIES = { sugar: 'THE SUGAR RUSHER', sodium: 'THE MSG MAXIMISER', noodles: 'THE PALM OIL PATRIOT', preservatives: 'THE PRESERVATIVE PRINCE', colours: 'THE COLOUR KID' };
+const SAMPLE = ['maggi','bournvita','realJuice','lays','parleG','frooti'];
+
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    const start = props.startScreen || 'upload';
+    this.state = {
+      screen: start,
+      cart: start === 'upload' ? [] : SAMPLE.slice(),
+      detectedCount: 0, scanDone: false, searchOpen: false, query: ''
+    };
+  }
+
+  componentWillUnmount() { this.clearTimers(); }
+
+  clearTimers() { (this._timers || []).forEach(clearTimeout); this._timers = []; }
+
+  startScan() {
+    // TODO: replace with tesseract.js OCR — read the screenshot and match product names against PRODUCTS
+    this.clearTimers();
+    const ids = Object.keys(PRODUCTS);
+    const picked = [];
+    while (picked.length < 6) {
+      const id = ids[Math.floor(Math.random() * ids.length)];
+      if (!picked.includes(id)) picked.push(id);
+    }
+    this.setState({ screen: 'scanning', cart: picked, detectedCount: 0, scanDone: false });
+    this._timers = picked.map((_, i) =>
+      setTimeout(() => this.setState({ detectedCount: i + 1 }), 400 * (i + 1))
+    );
+    this._timers.push(setTimeout(() => this.setState({ scanDone: true }), 400 * picked.length + 600));
+  }
+
+  score() {
+    const items = this.state.cart.map(id => PRODUCTS[id]).filter(Boolean);
+    if (!items.length) return 0;
+    const avg = items.reduce((s, p) => s + p.roastScore, 0) / items.length;
+    const totalSugarG = items.reduce((s, p) => s + p.sugarG, 0);
+    const teaspoons = Math.round(totalSugarG / 4);
+    const sodium = items.reduce((s, p) => s + p.sodiumMg, 0);
+    // Only a cart that is big, uniformly bad, AND extreme on sugar or sodium can pass 100.
+    const offCharts = items.length >= 5 && avg > 80 && (teaspoons > 60 || sodium > 4000);
+    if (offCharts) {
+      const bonus = Math.max(1, Math.min(10,
+        Math.round((avg - 80) + (teaspoons > 60 ? 3 : 0) + (sodium > 4000 ? 3 : 0))));
+      return 100 + bonus;
+    }
+    return Math.min(100, Math.round(avg));
+  }
+
+  verdictTier(score) {
+    if (score <= 25) return 'Well Done.';
+    if (score <= 50) return 'Look Closer.';
+    if (score <= 75) return 'Cooked.';
+    if (score <= 100) return 'Burnt to a Crisp.';
+    return 'Off The Charts.';
+  }
+
+  runScoreReveal(final) {
+    this.clearTimers();
+    let n = 0;
+    this.setState({ display: 0, shaking: true });
+    const step = () => {
+      n += Math.max(2, Math.round(final / 40));
+      if (n >= 100 && !this._paused) {
+        this._paused = true;
+        this.setState({ display: 100 });
+        this._timers.push(setTimeout(step, 400));
+        return;
+      }
+      if (n >= final) { this.setState({ display: final, shaking: false }); return; }
+      this.setState({ display: n });
+      this._timers.push(setTimeout(step, 30));
+    };
+    this._paused = false;
+    this._timers = this._timers || [];
+    this._timers.push(setTimeout(step, 200));
+  }
+
+  personality() {
+    const items = this.state.cart.map(id => PRODUCTS[id]).filter(Boolean);
+    const counts = {};
+    items.forEach(p => { counts[p.category] = (counts[p.category] || 0) + 1; });
+    const dominant = Object.keys(counts).sort((a, b) => counts[b] - counts[a])[0];
+    return PERSONALITIES[dominant] || 'THE MYSTERY MUNCHER';
+  }
+
+  totals() {
+    const items = this.state.cart.map(id => PRODUCTS[id]).filter(Boolean);
+    const totalSugarG = items.reduce((s, p) => s + p.sugarG, 0);
+    return {
+      teaspoons: Math.round(totalSugarG / 4),
+      cokeCans: (totalSugarG / 35).toFixed(1),
+      dailyLimitX: (totalSugarG / 25).toFixed(1)
+    };
+  }
+
+  downloadCard() {
+    const score = this.score();
+    const c = document.createElement('canvas');
+    c.width = 800; c.height = 1280;
+    const x = c.getContext('2d');
+    const mid = 400;
+    x.fillStyle = '#B91C1C'; x.fillRect(0, 0, 800, 1280);
+    x.fillStyle = '#FDF6F1'; x.textAlign = 'center';
+    x.font = '800 32px Inter, sans-serif';
+    x.fillText('THIRDCLUB', mid, 120);
+    x.font = 'italic 600 56px Fraunces, Georgia, serif';
+    x.fillText('I roasted my cart.', mid, 300);
+    // tier scale
+    const barX = 160, barY = 470, barW = 480, barH = 48;
+    const bands = [
+      { w: 25, col: '#8FBF8F', lbl: 'WELL DONE' },
+      { w: 25, col: '#E8A855', lbl: 'LOOK CLOSER' },
+      { w: 25, col: '#E85A3C', lbl: 'COOKED' },
+      { w: 25, col: '#7F1D1D', lbl: 'BURNT' },
+      { w: 10, col: '#1A1A1A', lbl: 'OFF CHARTS' }
+    ];
+    let bx = barX;
+    bands.forEach(b => {
+      const w = (barW * b.w) / 110;
+      x.fillStyle = b.col; x.fillRect(bx, barY, w, barH);
+      bx += w;
+    });
+    const px = barX + (barW * Math.max(2, Math.min(108, score))) / 110;
+    x.fillStyle = '#FDF6F1';
+    x.beginPath(); x.moveTo(px, barY - 8); x.lineTo(px - 18, barY - 32); x.lineTo(px + 18, barY - 32); x.closePath(); x.fill();
+    x.font = '600 14px Inter, sans-serif';
+    bx = barX;
+    bands.forEach(b => {
+      const w = (barW * b.w) / 110;
+      x.fillText(b.lbl, bx + w / 2, barY + barH + 28);
+      bx += w;
+    });
+    const tier = this.verdictTier(score).replace('.', '').toUpperCase();
+    x.font = 'italic 400 44px Fraunces, Georgia, serif';
+    x.fillText('My cart is:', mid, 650);
+    x.font = '700 56px Inter, sans-serif';
+    x.fillText(tier, mid, 720);
+    x.font = 'italic 400 30px Fraunces, Georgia, serif';
+    x.fillText('Worse than ' + Math.min(99, score) + '% of Indian households.', mid, 780);
+    const flags = this.state.cart.map(id => PRODUCTS[id]).filter(p => p && p.sugarG > 10).length;
+    x.font = '600 26px Inter, sans-serif';
+    x.fillText('PERSONALITY: ' + this.personality(), mid, 870);
+    x.globalAlpha = 0.8; x.fillText(flags + ' HIGH-SUGAR FLAGS', mid, 920); x.globalAlpha = 1;
+    const worst = this.state.cart.map(id => PRODUCTS[id]).filter(Boolean)
+      .slice().sort((a, b) => b.roastScore - a.roastScore)[0];
+    if (worst) {
+      x.globalAlpha = 0.7; x.font = '600 22px Inter, sans-serif';
+      x.fillText('WORST OFFENDER', mid, 980); x.globalAlpha = 1;
+      x.font = 'italic 700 40px Fraunces, Georgia, serif';
+      x.fillText(worst.name, mid, 1030);
+    }
+    x.globalAlpha = 0.4; x.fillRect(80, 1075, 640, 2); x.globalAlpha = 1;
+    const sw = Math.max(15, score - 45);
+    x.globalAlpha = 0.75; x.font = '600 20px Inter, sans-serif';
+    x.fillText('MY CART', 250, 1130); x.fillText('IF I SWITCH', 550, 1130); x.globalAlpha = 1;
+    x.font = '700 76px Fraunces, Georgia, serif';
+    x.fillText(String(score), 250, 1210); x.fillText(String(sw), 550, 1210);
+    x.font = '700 20px Inter, sans-serif';
+    x.fillStyle = '#FBC4C4'; x.fillText(tier, 250, 1245);
+    x.fillStyle = '#B9E3B9'; x.fillText(this.verdictTier(sw).replace('.', '').toUpperCase(), 550, 1245);
+    const a = document.createElement('a');
+    a.download = 'thirdclub-roast.png';
+    a.href = c.toDataURL('image/png');
+    a.click();
+  }
+
+  renderVals() {
+    const s = this.state;
+    const score = this.score();
+    const t = this.totals();
+    const cartItems = s.cart.map(id => PRODUCTS[id]).filter(Boolean);
+    const highSugar = cartItems.filter(p => p.sugarG > 10).length;
+    const palmOilCount = cartItems.filter(p => p.flags.some(f => /palm oil/i.test(f))).length;
+    const totalSodium = cartItems.reduce((sum, p) => sum + p.sodiumMg, 0);
+    const worst = cartItems.slice().sort((a, b) => b.roastScore - a.roastScore)[0];
+    const misleadingCount = cartItems.filter(p => p.roastScore >= 74).length;
+
+    const spoonArr = g => {
+      const n = Math.min(12, Math.round(g / 4));
+      return Array.from({ length: Math.max(n, 0) }, (_, i) => i);
+    };
+    const shakerArr = mg => {
+      const n = Math.min(12, Math.round(mg / 500));
+      return Array.from({ length: Math.max(n, 0) }, (_, i) => i);
+    };
+
+    const q = s.query.trim().toLowerCase();
+    const searchResults = Object.keys(PRODUCTS)
+      .filter(id => !s.cart.includes(id))
+      .filter(id => !q || PRODUCTS[id].name.toLowerCase().includes(q) || PRODUCTS[id].brand.toLowerCase().includes(q))
+      .slice(0, 8)
+      .map(id => ({
+        name: PRODUCTS[id].name,
+        brand: PRODUCTS[id].brand,
+        add: () => this.setState(st => ({ cart: st.cart.concat([id]), searchOpen: false, query: '' }))
+      }));
+
+    return {
+      isUpload: s.screen === 'upload',
+      isScanning: s.screen === 'scanning',
+      isCart: s.screen === 'cart',
+      isResults: s.screen === 'results',
+
+      onUpload: () => this.startScan(),
+      useSample: () => this.setState({ screen: 'cart', cart: SAMPLE.slice() }),
+      goToCart: () => { this.clearTimers(); this.setState({ screen: 'cart' }); },
+      goToResults: () => {
+        this.setState({ screen: 'results' });
+        if (this.score() > 100) this.runScoreReveal(this.score());
+      },
+      reset: () => { this.clearTimers(); this.setState({ screen: 'upload', cart: [], detectedCount: 0, scanDone: false }); },
+
+      detected: cartItems.slice(0, s.detectedCount).map(p => ({ name: p.name, brand: p.brand })),
+      scanDone: s.scanDone,
+
+      cart: s.cart.map((id, i) => ({
+        id, name: PRODUCTS[id].name, brand: PRODUCTS[id].brand,
+        remove: () => this.setState(st => ({ cart: st.cart.filter((_, j) => j !== i) }))
+      })),
+      cartCountLabel: s.cart.length + (s.cart.length === 1 ? ' product' : ' products'),
+
+      searchOpen: s.searchOpen,
+      query: s.query,
+      searchResults,
+      openSearch: () => this.setState({ searchOpen: true, query: '' }),
+      closeSearch: () => this.setState({ searchOpen: false }),
+      stopClose: e => e.stopPropagation(),
+      onQuery: e => this.setState({ query: e.target.value }),
+
+      score,
+      bannerScore: (s.display != null && score > 100) ? s.display : score,
+      offCharts: score > 100,
+      shaking: !!s.shaking,
+      shakeStyle: s.shaking ? "animation:tc-shake .35s ease-in-out infinite;" : "",
+      scorePct: Math.max(2, Math.min(98, (score / 110) * 100)) + "%",
+      percentileLine: "Worse than " + Math.min(99, score) + "% of Indian households.",
+      worstName: worst ? worst.name : "—",
+      worstClaim: worst ? (worst.misleadingClaim || worst.verdict) : "",
+      counter: CAMPAIGN_BASE.toLocaleString("en-IN"),
+      findings: [
+        t.teaspoons + " tsp of sugar hidden in " + cartItems.length + " products",
+        palmOilCount + (palmOilCount === 1 ? " brand" : " brands") + " with palm oil not on the front label",
+        misleadingCount + (misleadingCount === 1 ? " product" : " products") + " marketed as 'healthy' that failed the test"
+      ],
+      switchScore: Math.max(15, score - 45),
+      switchScore: Math.max(15, score - 45),
+      switchTier: this.verdictTier(Math.max(15, score - 45)).replace(".", "").toUpperCase(),
+      fearFacts: [
+        { title: "Type 2 Diabetes",
+          stat: "India has 101 million diabetics — the second-highest in the world.",
+          footer: "Your cart adds " + t.teaspoons + " tsp of sugar. Daily limit: 6 tsp." },
+        { title: "High Cholesterol",
+          stat: "Palm oil and trans fats raise LDL cholesterol by up to 40%.",
+          footer: "Your cart contains " + palmOilCount + (palmOilCount === 1 ? " product" : " products") + " with palm oil." },
+        { title: "Sodium Overload",
+          stat: "The average Indian consumes 11g of sodium daily — 2.2x the WHO limit.",
+          footer: "Your cart contributes " + totalSodium + "mg of sodium." }
+      ],
+      verdictTier: this.verdictTier(score),
+      verdictShort: this.verdictTier(score).replace('.', '').toUpperCase(),
+      personality: this.personality(),
+      highSugarLabel: highSugar + ' HIGH-SUGAR FLAGS',
+
+      breakdown: s.cart.map(id => ({
+        id,
+        name: PRODUCTS[id].name,
+        brand: PRODUCTS[id].brand,
+        spoons: spoonArr(PRODUCTS[id].sugarG),
+        shakers: shakerArr(PRODUCTS[id].sodiumMg),
+        sugarLabel: PRODUCTS[id].sugarG + 'g',
+        sodiumLabel: PRODUCTS[id].sodiumMg + 'mg',
+        flags: PRODUCTS[id].flags.slice(0, 4),
+        verdict: PRODUCTS[id].verdict
+      })),
+
+      totalStats: [
+        { value: String(t.teaspoons), label: 'Teaspoons of sugar' },
+        { value: String(t.cokeCans), label: 'Coca-Cola cans equivalent' },
+        { value: t.dailyLimitX + 'x', label: 'Daily sugar limit exceeded' }
+      ],
+
+      downloadCard: () => this.downloadCard()
+    };
+  }
+}
+</script>
+</body>
+</html>
